@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="toolbar_title">Репозитории</string>
+	<string name="logout_btn_desc">Выход</string>
+	<string name="star_img_desc">Изображение звезды</string>
+	<string name="fork_image_desc">Изображение форка с гитхаба</string>
+	<string name="watcher_image_desc">Изображение глаза</string>
+	<string name="license_text">Лицензия</string>
+	<string name="readme_error_dialog_title">Что-то пошло не так с описанием…</string>
+	<string name="repo_error_dialog_title">Что-то пошло не так с репозиторием…</string>
+	<string name="error_dialog_positive_btn_text">Попробовать еще раз</string>
+	<string name="readme_error_dialog_negative_btn_text">Пропустить</string>
+	<string name="repo_error_dialog_negative_btn_text">Отмена</string>
+	<string name="missing_license">Отсутствует</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="sign_in_btn">SIGN IN</string>
+	<string name="token_edit_text">Personal access token</string>
+	<string name="github_icon_desc">Github icon</string>
+</resources>

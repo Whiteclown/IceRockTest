@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="toolbar_title">Repositories</string>
+	<string name="logout_btn_desc">Logout</string>
+	<string name="star_img_desc">image of a star</string>
+	<string name="fork_image_desc">image of a fork</string>
+	<string name="watcher_image_desc">image of a watcher</string>
+	<string name="license_text">License</string>
+	<string name="readme_error_dialog_title">Something went wrong with description…</string>
+	<string name="repo_error_dialog_title">Something went wrong with repository…</string>
+	<string name="error_dialog_positive_btn_text">Try again</string>
+	<string name="readme_error_dialog_negative_btn_text">Skip</string>
+	<string name="repo_error_dialog_negative_btn_text">Cancel</string>
+	<string name="forks_text" translatable="false">%1$d forks</string>
+	<string name="stars_text" translatable="false">%1$d stars</string>
+	<string name="watchers_text" translatable="false">%1$d watchers</string>
+	<string name="missing_license">Missing</string>
+</resources>

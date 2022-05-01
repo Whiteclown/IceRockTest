@@ -6,8 +6,14 @@ import kotlinx.serialization.Serializable
 data class RepoDetailsDto(
 	val full_name: String,
 	val html_url: String,
-	val license: String?,
+	val license: LicenseDto?,
 	val stargazers_count: Int,
 	val forks: Int,
 	val watchers_count: Int,
-)
+) {
+
+	@Serializable
+	data class LicenseDto(
+		val spdx_id: String,
+	)
+}

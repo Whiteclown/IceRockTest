@@ -20,7 +20,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="#505050"
+				android:background="@color/grey_800"
 				android:orientation="horizontal"
 				android:paddingHorizontal="20dp"
 				android:paddingVertical="12dp">
@@ -31,9 +31,8 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:layout_marginStart="16dp"
-					android:background="#505050"
+					android:background="@color/grey_800"
 					android:text="@string/toolbar_title"
-					android:textColor="@color/design_default_color_on_primary"
 					android:textSize="24sp" />
 
 				<Space
@@ -47,9 +46,9 @@
 					android:layout_height="48dp"
 					android:layout_marginEnd="16dp"
 					android:layout_marginTop="12dp"
-					android:background="#505050"
-					app:srcCompat="@drawable/baseline_exit_to_app_white_24"
-					android:contentDescription="@string/logout_btn_desc" />
+					android:background="@color/grey_800"
+					android:contentDescription="@string/logout_btn_desc"
+					app:srcCompat="@drawable/baseline_exit_to_app_white_24" />
 			</LinearLayout>
 		</com.google.android.material.appbar.MaterialToolbar>
 	</com.google.android.material.appbar.AppBarLayout>
@@ -83,7 +82,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="8dp"
-				android:textColor="@color/design_default_color_on_primary"
 				app:layout_constraintBottom_toBottomOf="@+id/starImg"
 				app:layout_constraintStart_toEndOf="@+id/starImg" />
 
@@ -92,7 +90,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="8dp"
-				android:textColor="@color/design_default_color_on_primary"
 				app:layout_constraintBottom_toBottomOf="@+id/forkImg"
 				app:layout_constraintStart_toEndOf="@+id/forkImg" />
 
@@ -101,7 +98,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="16dp"
-				android:textColor="@color/design_default_color_on_primary"
 				app:layout_constraintBottom_toBottomOf="@+id/watcherImg"
 				app:layout_constraintEnd_toEndOf="parent" />
 
@@ -111,30 +107,30 @@
 				android:layout_height="16dp"
 				android:layout_marginStart="16dp"
 				android:layout_marginTop="16dp"
+				android:contentDescription="@string/star_img_desc"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@+id/license"
-				app:srcCompat="@drawable/baseline_star_white_24"
-				android:contentDescription="@string/star_img_desc" />
+				app:srcCompat="@drawable/baseline_star_white_24" />
 
 			<ImageView
 				android:id="@+id/forkImg"
 				android:layout_width="16dp"
 				android:layout_height="16dp"
 				android:layout_marginStart="130dp"
+				android:contentDescription="@string/fork_image_desc"
 				app:layout_constraintBottom_toBottomOf="@+id/stars"
 				app:layout_constraintStart_toEndOf="@+id/starImg"
-				app:srcCompat="@drawable/fork_arrow"
-				android:contentDescription="@string/fork_image_desc" />
+				app:srcCompat="@drawable/fork_arrow" />
 
 			<ImageView
 				android:id="@+id/watcherImg"
 				android:layout_width="16dp"
 				android:layout_height="16dp"
 				android:layout_marginEnd="8dp"
+				android:contentDescription="@string/watcher_image_desc"
 				app:layout_constraintBottom_toBottomOf="@+id/forks"
 				app:layout_constraintEnd_toStartOf="@+id/watchers"
-				app:srcCompat="@drawable/baseline_visibility_white_24"
-				android:contentDescription="@string/watcher_image_desc" />
+				app:srcCompat="@drawable/baseline_visibility_white_24" />
 
 			<TextView
 				android:id="@+id/license"
@@ -142,7 +138,6 @@
 				android:layout_height="wrap_content"
 				android:layout_marginStart="16dp"
 				android:layout_marginTop="16dp"
-				android:textColor="@color/design_default_color_on_primary"
 				android:text="@string/license_text"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@+id/weblink" />
@@ -153,7 +148,6 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="16dp"
 				android:layout_marginTop="16dp"
-				android:textColor="@color/design_default_color_on_primary"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintTop_toBottomOf="@+id/weblink" />
 
@@ -161,20 +155,20 @@
 				android:id="@+id/readme_loading_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:background="#1b1b1b"
+				android:background="@color/grey_800_dark"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/starImg" >
+				app:layout_constraintTop_toBottomOf="@+id/starImg">
 
 				<ProgressBar
 					android:id="@+id/readme_progress_bar"
 					android:layout_width="40dp"
 					android:layout_height="40dp"
-					android:layout_marginTop="300dp"
 					android:layout_centerInParent="true"
-					android:background="#1b1b1b"
+					android:layout_marginTop="300dp"
+					android:background="@color/grey_800_dark"
 					android:indeterminate="true"
-					android:indeterminateTint="@color/design_default_color_on_primary" />
+					android:indeterminateTint="@color/white" />
 
 				<TextView
 					android:id="@+id/repoDescription"
@@ -182,8 +176,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="8dp"
 					android:layout_marginStart="8dp"
-					android:layout_marginTop="16dp"
-					android:textColor="@color/design_default_color_on_primary" />
+					android:layout_marginTop="16dp" />
 			</RelativeLayout>
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
@@ -193,15 +186,15 @@
 		android:id="@+id/main_loading_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="#1b1b1b">
+		android:background="@color/grey_800_dark">
 
 		<ProgressBar
 			android:layout_width="40dp"
 			android:layout_height="40dp"
 			android:layout_centerInParent="true"
-			android:background="#1b1b1b"
+			android:background="@color/grey_800_dark"
 			android:indeterminate="true"
-			android:indeterminateTint="@color/design_default_color_on_primary" />
+			android:indeterminateTint="@color/white" />
 	</RelativeLayout>
 
 </LinearLayout>

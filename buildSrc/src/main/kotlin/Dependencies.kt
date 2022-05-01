@@ -1,6 +1,7 @@
 object Dependencies {
 
 	object Plugins {
+
 		const val ANDROID_GRADLE = "com.android.tools.build:gradle:7.1.3"
 		const val KOTLIN_GRADLE = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
 		const val HILT_GRADLE = "com.google.dagger:hilt-android-gradle-plugin:2.38.1"
@@ -18,17 +19,20 @@ object Dependencies {
 	}
 
 	object Hilt {
+
 		const val COMPILER = "com.google.dagger:hilt-compiler:2.38.1"
 		const val ANDROID = "com.google.dagger:hilt-android:2.38.1"
 	}
 
 	object Core {
+
 		const val CORE = "androidx.core:core-ktx:1.7.0"
 		const val APPCOMPAT = "androidx.appcompat:appcompat:1.4.1"
 		const val MATERIAL = "com.google.android.material:material:1.5.0"
 	}
 
 	object Network {
+
 		const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
 		const val OKHTTP = "com.squareup.okhttp3:okhttp:4.9.0"
 		const val OKHTTP_LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.0"
@@ -38,12 +42,14 @@ object Dependencies {
 	}
 
 	object Navigation {
+
 		const val FRAGMENT = "androidx.navigation:navigation-fragment-ktx:2.4.2"
 		const val UI = "androidx.navigation:navigation-ui-ktx:2.4.2"
 		const val DYNAMIC_FEATURES = "androidx.navigation:navigation-dynamic-features-fragment:2.4.2"
 	}
 
 	object Layout {
+
 		const val CONSTRAINT = "androidx.constraintlayout:constraintlayout:2.1.3"
 	}
 }

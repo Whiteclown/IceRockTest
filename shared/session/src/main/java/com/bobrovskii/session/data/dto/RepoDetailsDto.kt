@@ -1,19 +1,20 @@
 package com.bobrovskii.session.data.dto
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class RepoDetailsDto(
-	val full_name: String,
-	val html_url: String,
+	@SerialName("full_name") val fullName: String,
+	@SerialName("html_url") val htmlUrl: String,
 	val license: LicenseDto?,
-	val stargazers_count: Int,
+	@SerialName("stargazers_count") val stargazersCount: Int,
 	val forks: Int,
-	val watchers_count: Int,
+	@SerialName("watchers_count") val watchersCount: Int,
 ) {
 
 	@Serializable
 	data class LicenseDto(
-		val spdx_id: String,
+		@SerialName("spdx_id") val name: String,
 	)
 }

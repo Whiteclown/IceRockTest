@@ -1,6 +1,5 @@
 package com.bobrovskii.session.domain.usecase
 
-import com.bobrovskii.core.Authorized
 import com.bobrovskii.session.domain.repository.SessionRepository
 import javax.inject.Inject
 

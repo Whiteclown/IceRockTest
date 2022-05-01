@@ -23,7 +23,7 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="#505050"
+				android:background="@color/grey_800"
 				android:orientation="horizontal"
 				android:paddingHorizontal="20dp"
 				android:paddingVertical="12dp">
@@ -33,15 +33,14 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:layout_marginStart="16dp"
-					android:background="#505050"
-					android:textColor="@color/design_default_color_on_primary"
-					android:textSize="24sp"
-					android:text="@string/toolbar_title" />
+					android:background="@color/grey_800"
+					android:text="@string/toolbar_title"
+					android:textSize="24sp" />
 
 				<Space
-					android:layout_weight="1"
 					android:layout_width="0dp"
-					android:layout_height="wrap_content"/>
+					android:layout_height="wrap_content"
+					android:layout_weight="1" />
 
 				<ImageButton
 					android:id="@+id/logoutBtn"
@@ -49,11 +48,11 @@
 					android:layout_height="48dp"
 					android:layout_marginEnd="16dp"
 					android:layout_marginTop="12dp"
-					android:background="#505050"
+					android:background="@color/grey_800"
+					android:contentDescription="@string/logout_img_btn_desc"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintTop_toTopOf="parent"
-					app:srcCompat="@drawable/baseline_exit_to_app_white_24"
-					android:contentDescription="@string/logout_img_btn_desc" />
+					app:srcCompat="@drawable/baseline_exit_to_app_white_24" />
 			</LinearLayout>
 		</com.google.android.material.appbar.MaterialToolbar>
 	</com.google.android.material.appbar.AppBarLayout>
@@ -62,8 +61,10 @@
 		android:id="@+id/recyclerView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+		android:orientation="vertical"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/toolbar_container"
 		tools:layout_editor_absoluteX="0dp"
 		tools:listitem="@layout/item_repo" />
 
@@ -71,15 +72,15 @@
 		android:id="@+id/loading_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="#1b1b1b">
+		android:background="@color/grey_800_dark">
 
 		<ProgressBar
 			android:layout_width="40dp"
 			android:layout_height="40dp"
+			android:layout_centerInParent="true"
+			android:background="@color/grey_800_dark"
 			android:indeterminate="true"
-			android:background="#1b1b1b"
-			android:indeterminateTint="@color/design_default_color_on_primary"
-			android:layout_centerInParent="true" />
+			android:indeterminateTint="@color/white" />
 	</RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

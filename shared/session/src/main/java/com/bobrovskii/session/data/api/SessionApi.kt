@@ -5,7 +5,6 @@ import com.bobrovskii.session.data.dto.ReadmeDto
 import com.bobrovskii.session.data.dto.RepoDetailsDto
 import com.bobrovskii.session.data.dto.RepoDto
 import com.bobrovskii.session.data.dto.UserInfoDto
-import com.bobrovskii.session.domain.entity.Readme
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path

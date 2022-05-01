@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bobrovskii.repositorieslist.R
 import com.bobrovskii.repositorieslist.databinding.FragmentRepositoriesListBinding
 import com.bobrovskii.repositorieslist.presentation.RepositoriesListState
@@ -27,9 +26,8 @@ class RepositoriesListFragment : Fragment(R.layout.fragment_repositories_list) {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		_binding = FragmentRepositoriesListBinding.bind(view)
-		initRV(emptyList())
-		initUIState()
 		initListeners()
+		initUIState()
 		viewModel.getRepositories()
 	}
 
@@ -43,19 +41,18 @@ class RepositoriesListFragment : Fragment(R.layout.fragment_repositories_list) {
 		viewModel.state.onEach(::renderState).launchIn(viewModel.viewModelScope)
 	}
 
+	private fun renderState(state: RepositoriesListState) {
+		binding.toolbarContainer.visibility = if (state is RepositoriesListState.Loading) View.GONE else View.VISIBLE
+		binding.loadingView.visibility = if (state is RepositoriesListState.Loading) View.VISIBLE else View.GONE
+		if (state is RepositoriesListState.Loaded) initRV(state.repos)
+	}
+
 	private fun initRV(repos: List<Repo>) {
-		binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 		binding.recyclerView.adapter = RepoAdapter(
 			repos = repos,
 			onItemClick = {
 				viewModel.routeToDetails(it)
 			},
 		)
-	}
-
-	private fun renderState(state: RepositoriesListState) {
-		binding.toolbarContainer.visibility = if (state is RepositoriesListState.Loading) View.GONE else View.VISIBLE
-		binding.loadingView.visibility = if (state is RepositoriesListState.Loading) View.VISIBLE else View.GONE
-		if (state is RepositoriesListState.Loaded) initRV(state.repos)
 	}
 }

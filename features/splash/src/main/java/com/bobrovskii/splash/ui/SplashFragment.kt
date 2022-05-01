@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bobrovskii.splash.presentation.SplashViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import com.bobrovskii.splash.R
 import com.bobrovskii.splash.databinding.FragmentSplashBinding
+import com.bobrovskii.splash.presentation.SplashViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {

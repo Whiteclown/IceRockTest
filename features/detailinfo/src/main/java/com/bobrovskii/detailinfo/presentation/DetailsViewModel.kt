@@ -10,14 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.ResponseBody
-import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
-import retrofit2.Response
-import retrofit2.Retrofit
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel

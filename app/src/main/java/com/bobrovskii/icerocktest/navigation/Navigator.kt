@@ -1,7 +1,6 @@
 package com.bobrovskii.icerocktest.navigation
 
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import com.bobrovskii.authorization.presentation.AuthRouter
 import com.bobrovskii.detailinfo.presentation.DetailsRouter
 import com.bobrovskii.detailinfo.ui.DetailsFragment

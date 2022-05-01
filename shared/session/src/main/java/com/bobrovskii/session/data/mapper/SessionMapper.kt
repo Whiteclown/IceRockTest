@@ -11,19 +11,19 @@ import com.bobrovskii.session.domain.entity.UserInfo
 
 fun RepoDetailsDto.toEntity() =
 	RepoDetails(
-		name = full_name.split("/")[1],
-		owner = full_name.split("/")[0],
-		htmlUrl = html_url,
-		license = license?.spdx_id,
-		stargazersCount = stargazers_count,
+		name = fullName.split("/")[1],
+		owner = fullName.split("/")[0],
+		htmlUrl = htmlUrl,
+		license = license?.name,
+		stargazersCount = stargazersCount,
 		forks = forks,
-		watchersCount = watchers_count,
+		watchersCount = watchersCount,
 	)
 
 fun RepoDto.toEntity() =
 	Repo(
-		name = full_name.split("/")[1],
-		owner = full_name.split("/")[0],
+		name = fullName.split("/")[1],
+		owner = fullName.split("/")[0],
 		description = description,
 		language = language,
 	)

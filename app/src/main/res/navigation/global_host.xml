@@ -7,7 +7,7 @@
 	<fragment
 		android:id="@+id/authFragment"
 		android:name="com.bobrovskii.authorization.ui.AuthFragment"
-		android:label="AuthFragment" >
+		android:label="AuthFragment">
 		<action
 			android:id="@+id/action_authFragment_to_repositoriesListFragment"
 			app:destination="@id/repositoriesListFragment"
@@ -18,7 +18,7 @@
 	<fragment
 		android:id="@+id/repositoriesListFragment"
 		android:name="com.bobrovskii.repositorieslist.ui.RepositoriesListFragment"
-		android:label="RepositoriesListFragment" >
+		android:label="RepositoriesListFragment">
 		<action
 			android:id="@+id/action_repositoriesListFragment_to_detailsFragment"
 			app:destination="@id/detailsFragment" />
@@ -31,7 +31,7 @@
 	<fragment
 		android:id="@+id/detailsFragment"
 		android:name="com.bobrovskii.detailinfo.ui.DetailsFragment"
-		android:label="DetailsFragment" >
+		android:label="DetailsFragment">
 		<action
 			android:id="@+id/action_detailsFragment_to_authFragment"
 			app:destination="@id/authFragment"
@@ -41,7 +41,7 @@
 	<fragment
 		android:id="@+id/splashFragment"
 		android:name="com.bobrovskii.splash.ui.SplashFragment"
-		android:label="SplashFragment" >
+		android:label="SplashFragment">
 		<action
 			android:id="@+id/action_splashFragment_to_repositoriesListFragment"
 			app:destination="@id/repositoriesListFragment"

@@ -1,6 +1,6 @@
 package com.bobrovskii.session.data.storage
 
 data class KeyValueStorage(
-	var authToken: String?,
-	var username: String?,
+	val authToken: String?,
+	val username: String?,
 )

@@ -1,6 +1,5 @@
 package com.bobrovskii.repositorieslist.ui.adapter.viewholder
 
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

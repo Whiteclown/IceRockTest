@@ -64,10 +64,11 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 		with(binding) {
 			mainLoadingView.visibility = if (state is DetailsState.Loading) View.VISIBLE else View.GONE
 			toolbarContainer.visibility = if (state is DetailsState.Loading) View.GONE else View.VISIBLE
-			scrollView.visibility =  if (state is DetailsState.Loading) View.GONE else View.VISIBLE
+			scrollView.visibility = if (state is DetailsState.Loading) View.GONE else View.VISIBLE
 
 			repoDescription.visibility = if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.GONE else View.VISIBLE
-			readmeProgressBar.visibility = if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.VISIBLE else View.GONE
+			readmeProgressBar.visibility =
+				if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.VISIBLE else View.GONE
 
 			titleRepo.text = if (state is DetailsState.Loaded) state.githubRepo.name else ""
 			forks.text = if (state is DetailsState.Loaded) getString(R.string.forks_text, state.githubRepo.forks) else ""
@@ -77,7 +78,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 			weblink.text = if (state is DetailsState.Loaded) state.githubRepo.htmlUrl else ""
 
 			context?.let {
-				if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loaded) Markwon.create(it).setMarkdown(repoDescription, state.readmeState.markdown)
+				if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loaded) Markwon.create(it)
+					.setMarkdown(repoDescription, state.readmeState.markdown)
 			}
 
 			if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Error) {

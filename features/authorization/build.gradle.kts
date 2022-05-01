@@ -18,5 +18,6 @@ dependencies {
 
 	implementation(Dependencies.Layout.CONSTRAINT)
 
+	implementation(project(Modules.Core.CORE))
 	implementation(project(Modules.Shared.SESSION))
 }

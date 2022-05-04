@@ -15,4 +15,6 @@ splash -> Загрузочный экран
 >>session -> Модуль для работы с github api  
 
 # Скриншоты
-<img src="https://user-images.githubusercontent.com/59654044/166139761-8daf469a-f51c-4c60-bc8d-7039fcb15f6e.png" width="250" height="500"> <img src="https://user-images.githubusercontent.com/59654044/166139931-4c4b98e0-720d-4da1-ae70-79e3638872d0.png" width="250" height="500"> <img src="https://user-images.githubusercontent.com/59654044/166140988-625c52b8-dafe-437e-9ab2-8456e4e32e91.png" width="250" height="500">
+<img src="https://user-images.githubusercontent.com/59654044/166746735-937fd516-bcd9-43ec-bcd9-fa52b41af30d.png" width="250" height="500"> <img src="https://user-images.githubusercontent.com/59654044/166746926-7237c5cd-6d56-4f4e-8e8a-c03517ac0ea5.png" width="250" height="500"> <img src="https://user-images.githubusercontent.com/59654044/166747070-78ba9520-efe6-4f25-8938-e089e97e4176.png" width="250" height="500">
+
+

@@ -3,4 +3,5 @@
 	<string name="sign_in_btn">SIGN IN</string>
 	<string name="token_edit_text">Personal access token</string>
 	<string name="github_icon_desc">Github icon</string>
+	<string name="error_dialog_title">Error</string>
 </resources>

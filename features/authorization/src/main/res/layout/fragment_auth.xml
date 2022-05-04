@@ -3,24 +3,50 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/grey_800_dark">
+	android:background="@color/bg">
 
 	<ImageView
 		android:id="@+id/imageView"
-		android:layout_width="261dp"
-		android:layout_height="235dp"
-		android:layout_marginTop="28dp"
+		android:layout_width="96dp"
+		android:layout_height="96dp"
+		android:layout_marginTop="64dp"
 		android:contentDescription="@string/github_icon_desc"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/github" />
+		app:srcCompat="@drawable/ic_group" />
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/personal_token"
+		android:layout_width="350dp"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="113dp"
+		android:textColorHint="#80FFFFFF"
+		app:backgroundTint="@color/secondary"
+		app:boxStrokeColor="@color/secondary"
+		app:hintTextColor="@color/secondary"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/token_edit_text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/bg"
+			android:hint="@string/token_edit_text"
+			android:inputType="text"
+			android:textColor="@color/white"
+			android:textColorHint="#80FFFFFF" />
+	</com.google.android.material.textfield.TextInputLayout>
 
 	<RelativeLayout
 		android:id="@+id/signIn"
 		android:layout_width="350dp"
-		android:layout_height="48dp"
-		android:layout_marginBottom="16dp"
+		android:layout_height="35dp"
+		android:layout_marginBottom="17dp"
+		android:layout_marginEnd="16dp"
+		android:layout_marginStart="16dp"
 		android:background="@drawable/button_with_progress_bg"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +55,10 @@
 
 		<ProgressBar
 			android:id="@+id/progress_bar"
-			android:layout_width="25dp"
-			android:layout_height="25dp"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
 			android:layout_centerInParent="true"
-			android:background="@color/light_green_400"
+			android:background="@color/accent"
 			android:indeterminate="true"
 			android:indeterminateTint="@color/white"
 			android:visibility="gone" />
@@ -42,32 +68,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerInParent="true"
-			android:background="@color/light_green_400"
-			android:text="@string/sign_in_btn" />
+			android:background="@color/accent"
+			android:text="@string/sign_in_btn"
+			android:textColor="@color/white" />
 
 	</RelativeLayout>
-
-	<com.google.android.material.textfield.TextInputLayout
-		android:id="@+id/personal_token"
-		android:layout_width="350dp"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="113dp"
-		app:backgroundTint="@color/light_green_400_dark"
-		app:boxStrokeColor="@color/light_green_400_dark"
-		app:hintTextColor="@color/light_green_400_dark"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-		<com.google.android.material.textfield.TextInputEditText
-			android:id="@+id/token_edit_text"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/grey_800_dark"
-			android:hint="@string/token_edit_text"
-			android:inputType="text"
-			android:textColor="@color/white"
-			android:textColorHint="@color/grey_800_light" />
-	</com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

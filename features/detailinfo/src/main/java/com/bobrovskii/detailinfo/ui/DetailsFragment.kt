@@ -2,7 +2,6 @@ package com.bobrovskii.detailinfo.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -45,7 +44,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		_binding = FragmentDetailsBinding.bind(view)
-		initObservers()
+		initUIState()
 		initListeners()
 		viewModel.getRepo(ownerName, repoName)
 	}
@@ -54,63 +53,69 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 		binding.logoutBtn.setOnClickListener {
 			viewModel.logout()
 		}
+		binding.ivBack.setOnClickListener {
+			viewModel.routeBack()
+		}
+		binding.mainNetworkErrorView.btnRefresh.root.setOnClickListener {
+			viewModel.getRepo(ownerName, repoName)
+		}
+		binding.mainUndefinedErrorView.btnRefresh.root.setOnClickListener {
+			viewModel.getRepo(ownerName, repoName)
+		}
+		binding.readmeNetworkErrorView.btnRefresh.root.setOnClickListener {
+			viewModel.getRepoReadme()
+		}
+		binding.readmeUndefinedErrorView.btnRefresh.root.setOnClickListener {
+			viewModel.getRepoReadme()
+		}
 	}
 
-	private fun initObservers() {
+	private fun initUIState() {
 		viewModel.state.onEach(::renderState).launchIn(viewModel.viewModelScope)
+		binding.mainNetworkErrorView.btnRefresh.btnText.text = "RETRY"
+		binding.mainUndefinedErrorView.btnRefresh.btnText.text = "REFRESH"
+		binding.readmeNetworkErrorView.btnRefresh.btnText.text = "RETRY"
+		binding.readmeUndefinedErrorView.btnRefresh.btnText.text = "REFRESH"
 	}
 
 	private fun renderState(state: DetailsState) {
 		with(binding) {
 			mainLoadingView.visibility = if (state is DetailsState.Loading) View.VISIBLE else View.GONE
 			toolbarContainer.visibility = if (state is DetailsState.Loading) View.GONE else View.VISIBLE
-			scrollView.visibility = if (state is DetailsState.Loading) View.GONE else View.VISIBLE
-
-			repoDescription.visibility = if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.GONE else View.VISIBLE
-			readmeProgressBar.visibility =
-				if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.VISIBLE else View.GONE
-
-			titleRepo.text = if (state is DetailsState.Loaded) state.githubRepo.name else ""
-			forks.text = if (state is DetailsState.Loaded) getString(R.string.forks_text, state.githubRepo.forks) else ""
-			stars.text = if (state is DetailsState.Loaded) getString(R.string.stars_text, state.githubRepo.stargazersCount) else ""
-			watchers.text = if (state is DetailsState.Loaded) getString(R.string.watchers_text, state.githubRepo.watchersCount) else ""
-			licenseVal.text = if (state is DetailsState.Loaded) state.githubRepo.license ?: getString(R.string.missing_license) else ""
-			weblink.text = if (state is DetailsState.Loaded) state.githubRepo.htmlUrl else ""
+			scrollView.visibility = if (state is DetailsState.Loaded) View.VISIBLE else View.GONE
 
 			context?.let {
 				if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loaded) Markwon.create(it)
 					.setMarkdown(repoDescription, state.readmeState.markdown)
 			}
+			if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Empty) repoDescription.text = "No README.md"
+			repoDescription.visibility = if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.GONE else View.VISIBLE
+			readmeProgressBar.visibility =
+				if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Loading) View.VISIBLE else View.GONE
+			readmeLoadingView.visibility = if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Error) View.GONE else View.VISIBLE
 
-			if (state is DetailsState.Loaded && state.readmeState is DetailsState.ReadmeState.Error) {
-				context?.let {
-					AlertDialog
-						.Builder(it)
-						.setTitle(getString(R.string.readme_error_dialog_title))
-						.setMessage(state.readmeState.error)
-						.setPositiveButton(getString(R.string.error_dialog_positive_btn_text)) { _, _ ->
-							viewModel.getRepoReadme()
-						}
-						.setNegativeButton(getString(R.string.readme_error_dialog_negative_btn_text)) { _, _ ->
-						}
-						.show()
-				}
-			}
-			if (state is DetailsState.Error) {
-				context?.let {
-					AlertDialog
-						.Builder(it)
-						.setTitle(getString(R.string.repo_error_dialog_title))
-						.setMessage(state.error)
-						.setPositiveButton(getString(R.string.error_dialog_positive_btn_text)) { _, _ ->
-							viewModel.getRepo(ownerName, repoName)
-						}
-						.setNegativeButton(getString(R.string.repo_error_dialog_negative_btn_text)) { _, _ ->
-							viewModel.routeBack()
-						}
-						.show()
-				}
-			}
+			titleRepo.text = if (state is DetailsState.Loaded) state.githubRepo.name else ""
+			tvForksCount.text = if (state is DetailsState.Loaded) state.githubRepo.forks.toString() else ""
+			tvStarsCount.text = if (state is DetailsState.Loaded) state.githubRepo.stargazersCount.toString() else ""
+			tvWatchersCount.text = if (state is DetailsState.Loaded) state.githubRepo.watchersCount.toString() else ""
+			licenseVal.text = if (state is DetailsState.Loaded) state.githubRepo.license ?: getString(R.string.missing_license) else ""
+			weblink.text = if (state is DetailsState.Loaded) state.githubRepo.htmlUrl else ""
+
+			binding.mainNetworkErrorView.root.visibility = if (state is DetailsState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
+
+			binding.mainUndefinedErrorView.root.visibility = if (state is DetailsState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
+
+			binding.readmeNetworkErrorView.root.visibility = if (
+				state is DetailsState.Loaded &&
+				state.readmeState is DetailsState.ReadmeState.Error &&
+				state.readmeState.isNoConnectionError
+			) View.VISIBLE else View.GONE
+
+			binding.readmeUndefinedErrorView.root.visibility = if (
+				state is DetailsState.Loaded &&
+				state.readmeState is DetailsState.ReadmeState.Error &&
+				!state.readmeState.isNoConnectionError
+			) View.VISIBLE else View.GONE
 		}
 	}
 }

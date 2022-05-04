@@ -3,6 +3,7 @@ package com.bobrovskii.detailinfo.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bobrovskii.core.Base64Decoder
+import com.bobrovskii.core.NoNetworkConnectionException
 import com.bobrovskii.session.domain.usecase.ClearSessionUseCase
 import com.bobrovskii.session.domain.usecase.GetRepositoryReadmeUseCase
 import com.bobrovskii.session.domain.usecase.GetRepositoryUseCase
@@ -35,7 +36,10 @@ class DetailsViewModel @Inject constructor(
 				)
 				getRepoReadme()
 			} catch (e: Exception) {
-				_state.value = DetailsState.Error(e.message.toString())
+				when (e) {
+					is NoNetworkConnectionException -> _state.value = DetailsState.Error(e.message, true)
+					else                            -> _state.value = DetailsState.Error(e.message.toString(), false)
+				}
 			}
 		}
 	}
@@ -51,16 +55,25 @@ class DetailsViewModel @Inject constructor(
 						markdown = Base64Decoder.decode(readme.content)
 					),
 				)
-			} catch (e: HttpException) {
-				if (e.code() == 404) {
-					_state.value = DetailsState.Loaded(
+			} catch (e: Exception) {
+				when (e) {
+					is NoNetworkConnectionException -> _state.value = DetailsState.Loaded(
 						githubRepo = content.githubRepo,
-						readmeState = DetailsState.ReadmeState.Empty,
+						readmeState = DetailsState.ReadmeState.Error(e.message, true),
 					)
-				} else {
-					_state.value = DetailsState.Loaded(
+
+					is HttpException                -> {
+						if (e.code() == 404) {
+							_state.value = DetailsState.Loaded(
+								githubRepo = content.githubRepo,
+								readmeState = DetailsState.ReadmeState.Empty,
+							)
+						}
+					}
+
+					else                            -> _state.value = DetailsState.Loaded(
 						githubRepo = content.githubRepo,
-						readmeState = DetailsState.ReadmeState.Error(e.message.toString()),
+						readmeState = DetailsState.ReadmeState.Error(e.message.toString(), false),
 					)
 				}
 			}

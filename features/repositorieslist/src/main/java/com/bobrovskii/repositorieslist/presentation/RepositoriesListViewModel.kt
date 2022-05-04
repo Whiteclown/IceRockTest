@@ -2,6 +2,7 @@ package com.bobrovskii.repositorieslist.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bobrovskii.core.NoNetworkConnectionException
 import com.bobrovskii.session.domain.entity.Repo
 import com.bobrovskii.session.domain.usecase.ClearSessionUseCase
 import com.bobrovskii.session.domain.usecase.GetRepositoriesUseCase
@@ -32,7 +33,10 @@ class RepositoriesListViewModel @Inject constructor(
 					_state.value = RepositoriesListState.Loaded(repos)
 				}
 			} catch (e: Exception) {
-				_state.value = RepositoriesListState.Error(e.message.toString())
+				_state.value = when (e) {
+					is NoNetworkConnectionException -> RepositoriesListState.Error(e.message, true)
+					else                            -> RepositoriesListState.Error(e.message.toString(), false)
+				}
 			}
 		}
 	}

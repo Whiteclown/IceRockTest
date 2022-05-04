@@ -1,6 +1,7 @@
 package com.bobrovskii.repositorieslist.ui.adapter.viewholder
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bobrovskii.repositorieslist.databinding.ItemRepoBinding
@@ -15,10 +16,13 @@ class RepoViewHolder(
 		onItemClicked: (Repo) -> Unit
 	) {
 		with(binding) {
-			//Set data and listeners
 			repoTitle.text = item.name
 			language.text = item.language
-			description.text = item.description
+			if (item.description.isNullOrBlank()) {
+				description.visibility = View.GONE
+			} else {
+				description.text = item.description
+			}
 
 			layout.setOnClickListener { onItemClicked(item) }
 		}

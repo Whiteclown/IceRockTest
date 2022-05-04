@@ -8,16 +8,18 @@ plugins {
 
 dependencies {
     kapt(Dependencies.Hilt.COMPILER)
-    implementation(Dependencies.Hilt.ANDROID)
+	implementation(Dependencies.Hilt.ANDROID)
 
-    implementation(Dependencies.Core.CORE)
-    implementation(Dependencies.Core.APPCOMPAT)
-    implementation(Dependencies.Core.MATERIAL)
+	implementation(Dependencies.Core.CORE)
+	implementation(Dependencies.Core.APPCOMPAT)
+	implementation(Dependencies.Core.MATERIAL)
 
-    implementation(Dependencies.Navigation.FRAGMENT)
+	implementation(Dependencies.Network.RETROFIT)
 
-    implementation(Dependencies.Layout.CONSTRAINT)
+	implementation(Dependencies.Navigation.FRAGMENT)
 
-    implementation(project(Modules.Core.CORE))
-    implementation(project(Modules.Shared.SESSION))
+	implementation(Dependencies.Layout.CONSTRAINT)
+
+	implementation(project(Modules.Core.CORE))
+	implementation(project(Modules.Shared.SESSION))
 }

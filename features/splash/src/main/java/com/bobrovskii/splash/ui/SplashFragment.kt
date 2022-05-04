@@ -20,7 +20,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		_binding = FragmentSplashBinding.bind(view)
-		with(binding.githubIcon) {
+		with(binding.icCompany) {
 			alpha = 0f
 			animate().setDuration(1500).alpha(1f).withEndAction {
 				viewModel.routeFromSplash()

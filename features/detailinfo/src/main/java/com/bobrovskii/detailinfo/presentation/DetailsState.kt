@@ -6,7 +6,7 @@ sealed interface DetailsState {
 
 	object Loading : DetailsState
 
-	data class Error(val error: String) : DetailsState
+	data class Error(val error: String, val isNoConnectionError: Boolean) : DetailsState
 
 	data class Loaded(
 		val githubRepo: RepoDetails,
@@ -19,7 +19,7 @@ sealed interface DetailsState {
 
 		object Empty : ReadmeState
 
-		data class Error(val error: String) : ReadmeState
+		data class Error(val error: String, val isNoConnectionError: Boolean) : ReadmeState
 
 		data class Loaded(val markdown: String) : ReadmeState
 	}

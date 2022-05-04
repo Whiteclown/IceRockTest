@@ -3,4 +3,5 @@
 	<string name="sign_in_btn">ВОЙТИ</string>
 	<string name="token_edit_text">Персональный токен доступа</string>
 	<string name="github_icon_desc">Иконка гитхаб</string>
+	<string name="error_dialog_title">Ошибка</string>
 </resources>

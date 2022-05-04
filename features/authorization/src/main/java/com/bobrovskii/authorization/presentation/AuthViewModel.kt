@@ -26,7 +26,7 @@ class AuthViewModel @Inject constructor(
 
 	fun onSignButtonPressed(token: String) {
 		if (!validateToken(token)) {
-			_state.value = AuthState.InvalidInput("Token hasn't passed the validation")
+			_state.value = AuthState.InvalidInput("Invalid token")
 		} else {
 			_state.value = AuthState.Loading
 			viewModelScope.launch {

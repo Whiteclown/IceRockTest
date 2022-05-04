@@ -1,8 +1,12 @@
 package com.bobrovskii.authorization.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -70,16 +74,19 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 			is AuthAction.RouteToMain -> viewModel.routeToMain()
 
 			is AuthAction.ShowError   -> {
+				val message = SpannableString(action.message)
+				message.setSpan(
+					ForegroundColorSpan(Color.WHITE),
+					0,
+					message.length,
+					Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+				)
 				context?.let {
 					AlertDialog
 						.Builder(it)
-						.setTitle("Something went wrong with authorization...")
-						.setMessage(action.message)
-						.setPositiveButton("Try again") { _, _ ->
-							viewModel.onSignButtonPressed(binding.tokenEditText.text.toString())
-						}
-						.setNegativeButton("Cancel") { _, _ ->
-						}
+						.setTitle(getString(R.string.error_dialog_title))
+						.setMessage(message)
+						.setNeutralButton("Ok") { _, _ -> }
 						.show()
 				}
 			}

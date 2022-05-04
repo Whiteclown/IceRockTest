@@ -3,13 +3,14 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:background="@color/bg">
 
 	<!--Тулбар-->
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/toolbar_container"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="56dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent">
@@ -23,19 +24,17 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="@color/grey_800"
-				android:orientation="horizontal"
-				android:paddingHorizontal="20dp"
-				android:paddingVertical="12dp">
+				android:background="@color/status_bar"
+				android:orientation="horizontal">
 
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
-					android:layout_marginStart="16dp"
-					android:background="@color/grey_800"
+					android:layout_marginStart="24dp"
+					android:background="@color/status_bar"
 					android:text="@string/toolbar_title"
-					android:textSize="24sp" />
+					android:textSize="20sp" />
 
 				<Space
 					android:layout_width="0dp"
@@ -44,15 +43,16 @@
 
 				<ImageButton
 					android:id="@+id/logoutBtn"
-					android:layout_width="48dp"
-					android:layout_height="48dp"
-					android:layout_marginEnd="16dp"
-					android:layout_marginTop="12dp"
-					android:background="@color/grey_800"
+					android:layout_width="22dp"
+					android:layout_height="18dp"
+					android:layout_marginBottom="19dp"
+					android:layout_marginEnd="19dp"
+					android:layout_marginTop="19dp"
+					android:background="@color/status_bar"
 					android:contentDescription="@string/logout_img_btn_desc"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintTop_toTopOf="parent"
-					app:srcCompat="@drawable/baseline_exit_to_app_white_24" />
+					app:srcCompat="@drawable/ic_input" />
 			</LinearLayout>
 		</com.google.android.material.appbar.MaterialToolbar>
 	</com.google.android.material.appbar.AppBarLayout>
@@ -68,19 +68,20 @@
 		tools:layout_editor_absoluteX="0dp"
 		tools:listitem="@layout/item_repo" />
 
-	<RelativeLayout
-		android:id="@+id/loading_view"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@color/grey_800_dark">
+	<include
+		android:id="@+id/empty_view"
+		layout="@layout/empty_view" />
 
-		<ProgressBar
-			android:layout_width="40dp"
-			android:layout_height="40dp"
-			android:layout_centerInParent="true"
-			android:background="@color/grey_800_dark"
-			android:indeterminate="true"
-			android:indeterminateTint="@color/white" />
-	</RelativeLayout>
+	<include
+		android:id="@+id/network_error_view"
+		layout="@layout/network_error_view" />
+
+	<include
+		android:id="@+id/undefined_error_view"
+		layout="@layout/undefined_error_view" />
+
+	<include
+		android:id="@+id/loading_view"
+		layout="@layout/loading_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

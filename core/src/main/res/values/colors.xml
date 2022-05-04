@@ -8,4 +8,7 @@
 	<color name="secondary">#58A6FF</color>
 	<color name="grey">#21262D</color>
 	<color name="error">#B00020</color>
+	<color name="purple">#A37AEE</color>
+	<color name="yellow">#F4E264</color>
+	<color name="orange">#F57C00</color>
 </resources>

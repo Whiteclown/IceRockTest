@@ -63,7 +63,6 @@ class RepositoriesListFragment : Fragment(R.layout.fragment_repositories_list) {
 		binding.emptyView.root.visibility = if (state is RepositoriesListState.Empty) View.VISIBLE else View.GONE
 
 		binding.networkErrorView.root.visibility = if (state is RepositoriesListState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
-
 		binding.undefinedErrorView.root.visibility = if (state is RepositoriesListState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
 	}
 

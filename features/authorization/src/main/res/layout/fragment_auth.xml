@@ -7,8 +7,8 @@
 
 	<ImageView
 		android:id="@+id/imageView"
-		android:layout_width="96dp"
-		android:layout_height="96dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_marginTop="64dp"
 		android:contentDescription="@string/github_icon_desc"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -18,13 +18,14 @@
 
 	<com.google.android.material.textfield.TextInputLayout
 		android:id="@+id/personal_token"
-		android:layout_width="350dp"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="113dp"
+		android:paddingHorizontal="16dp"
 		android:textColorHint="#80FFFFFF"
 		app:backgroundTint="@color/secondary"
 		app:boxStrokeColor="@color/secondary"
 		app:hintTextColor="@color/secondary"
+		app:layout_constraintBottom_toTopOf="@+id/signIn"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -42,7 +43,7 @@
 
 	<RelativeLayout
 		android:id="@+id/signIn"
-		android:layout_width="350dp"
+		android:layout_width="match_parent"
 		android:layout_height="35dp"
 		android:layout_marginBottom="17dp"
 		android:layout_marginEnd="16dp"
@@ -71,7 +72,6 @@
 			android:background="@color/accent"
 			android:text="@string/sign_in_btn"
 			android:textColor="@color/white" />
-
 	</RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

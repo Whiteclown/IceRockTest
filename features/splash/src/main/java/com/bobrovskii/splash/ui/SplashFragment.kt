@@ -22,7 +22,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 		_binding = FragmentSplashBinding.bind(view)
 		with(binding.icCompany) {
 			alpha = 0f
-			animate().setDuration(1500).alpha(1f).withEndAction {
+			animate().setDuration(500).alpha(1f).withEndAction {
 				viewModel.routeFromSplash()
 			}
 		}

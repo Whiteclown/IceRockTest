@@ -25,6 +25,7 @@ class AuthViewModel @Inject constructor(
 	val actions: Flow<AuthAction> = _actions.receiveAsFlow()
 
 	fun onSignButtonPressed(token: String) {
+
 		if (!validateToken(token)) {
 			_state.value = AuthState.InvalidInput("Invalid token")
 		} else {

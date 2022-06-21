@@ -12,7 +12,6 @@ import com.bobrovskii.repositorieslist.databinding.FragmentRepositoriesListBindi
 import com.bobrovskii.repositorieslist.presentation.RepositoriesListState
 import com.bobrovskii.repositorieslist.presentation.RepositoriesListViewModel
 import com.bobrovskii.repositorieslist.ui.adapter.RepoAdapter
-import com.bobrovskii.session.domain.entity.Repo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,9 +24,16 @@ class RepositoriesListFragment : Fragment(R.layout.fragment_repositories_list) {
 
 	private val viewModel: RepositoriesListViewModel by viewModels()
 
+	private val repoAdapter = RepoAdapter(
+		onItemClick = {
+			viewModel.routeToDetails(it)
+		},
+	)
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		_binding = FragmentRepositoriesListBinding.bind(view)
+		initRV()
 		initListeners()
 		initUIState()
 		viewModel.getRepositories()
@@ -58,7 +64,7 @@ class RepositoriesListFragment : Fragment(R.layout.fragment_repositories_list) {
 	private fun renderState(state: RepositoriesListState) {
 		binding.toolbarContainer.visibility = if (state is RepositoriesListState.Loading) View.GONE else View.VISIBLE
 		binding.loadingView.root.visibility = if (state is RepositoriesListState.Loading) View.VISIBLE else View.GONE
-		if (state is RepositoriesListState.Loaded) initRV(state.repos)
+		if (state is RepositoriesListState.Loaded) repoAdapter.repos = state.repos
 
 		binding.emptyView.root.visibility = if (state is RepositoriesListState.Empty) View.VISIBLE else View.GONE
 
@@ -66,18 +72,13 @@ class RepositoriesListFragment : Fragment(R.layout.fragment_repositories_list) {
 		binding.undefinedErrorView.root.visibility = if (state is RepositoriesListState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
 	}
 
-	private fun initRV(repos: List<Repo>) {
+	private fun initRV() {
 		binding.recyclerView.addItemDecoration(
 			DividerItemDecoration(
 				context,
 				LinearLayoutManager.VERTICAL,
 			)
 		)
-		binding.recyclerView.adapter = RepoAdapter(
-			repos = repos,
-			onItemClick = {
-				viewModel.routeToDetails(it)
-			},
-		)
+		binding.recyclerView.adapter = repoAdapter
 	}
 }

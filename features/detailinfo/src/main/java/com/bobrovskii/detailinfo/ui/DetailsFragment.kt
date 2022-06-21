@@ -29,18 +29,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 	private val repoName: String
 		get() = requireNotNull(requireArguments().getString(REPO_NAME))
 
-	companion object {
-
-		private const val OWNER_NAME = "ownerName"
-		private const val REPO_NAME = "repoName"
-
-		fun createBundle(ownerName: String, repoName: String) =
-			bundleOf(
-				OWNER_NAME to ownerName,
-				REPO_NAME to repoName,
-			)
-	}
-
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		_binding = FragmentDetailsBinding.bind(view)
@@ -117,5 +105,17 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 				!state.readmeState.isNoConnectionError
 			) View.VISIBLE else View.GONE
 		}
+	}
+
+	companion object {
+
+		private const val OWNER_NAME = "ownerName"
+		private const val REPO_NAME = "repoName"
+
+		fun createBundle(ownerName: String, repoName: String) =
+			bundleOf(
+				OWNER_NAME to ownerName,
+				REPO_NAME to repoName,
+			)
 	}
 }

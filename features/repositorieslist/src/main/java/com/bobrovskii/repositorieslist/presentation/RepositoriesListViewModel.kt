@@ -24,18 +24,19 @@ class RepositoriesListViewModel @Inject constructor(
 
 	fun getRepositories() {
 		viewModelScope.launch {
-			_state.value = RepositoriesListState.Loading
-			try {
-				val repos = getRepositoriesUseCase()
-				if (repos.isEmpty()) {
-					_state.value = RepositoriesListState.Empty
-				} else {
-					_state.value = RepositoriesListState.Loaded(repos)
-				}
-			} catch (e: Exception) {
-				_state.value = when (e) {
-					is NoNetworkConnectionException -> RepositoriesListState.Error(e.message, true)
-					else                            -> RepositoriesListState.Error(e.message.toString(), false)
+			if (_state.value is RepositoriesListState.Loading) {
+				try {
+					val repos = getRepositoriesUseCase()
+					if (repos.isEmpty()) {
+						_state.value = RepositoriesListState.Empty
+					} else {
+						_state.value = RepositoriesListState.Loaded(repos)
+					}
+				} catch (e: Exception) {
+					_state.value = when (e) {
+						is NoNetworkConnectionException -> RepositoriesListState.Error(e.message, true)
+						else                            -> RepositoriesListState.Error(e.message.toString(), false)
+					}
 				}
 			}
 		}

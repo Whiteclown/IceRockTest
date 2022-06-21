@@ -26,55 +26,59 @@ class DetailsViewModel @Inject constructor(
 	val state = _state.asStateFlow()
 
 	fun getRepo(ownerName: String, repositoryName: String) {
-		viewModelScope.launch {
-			_state.value = DetailsState.Loading
-			try {
-				val repo = getRepositoryUseCase(ownerName, repositoryName)
-				_state.value = DetailsState.Loaded(
-					githubRepo = repo,
-					readmeState = DetailsState.ReadmeState.Loading,
-				)
-				getRepoReadme()
-			} catch (e: Exception) {
-				when (e) {
-					is NoNetworkConnectionException -> _state.value = DetailsState.Error(e.message, true)
-					else                            -> _state.value = DetailsState.Error(e.message.toString(), false)
+		if (_state.value is DetailsState.Loading) {
+			viewModelScope.launch {
+				_state.value = DetailsState.Loading
+				try {
+					val repo = getRepositoryUseCase(ownerName, repositoryName)
+					_state.value = DetailsState.Loaded(
+						githubRepo = repo,
+						readmeState = DetailsState.ReadmeState.Loading,
+					)
+					getRepoReadme()
+				} catch (e: Exception) {
+					when (e) {
+						is NoNetworkConnectionException -> _state.value = DetailsState.Error(e.message, true)
+						else                            -> _state.value = DetailsState.Error(e.message.toString(), false)
+					}
 				}
 			}
 		}
 	}
 
 	fun getRepoReadme() {
-		viewModelScope.launch {
-			val content = _state.value as DetailsState.Loaded
-			try {
-				val readme = getRepositoryReadmeUseCase(ownerName = content.githubRepo.owner, repositoryName = content.githubRepo.name)
-				_state.value = DetailsState.Loaded(
-					githubRepo = content.githubRepo,
-					readmeState = DetailsState.ReadmeState.Loaded(
-						markdown = Base64Decoder.decode(readme.content)
-					),
-				)
-			} catch (e: Exception) {
-				when (e) {
-					is NoNetworkConnectionException -> _state.value = DetailsState.Loaded(
+		if (_state.value is DetailsState.Loaded && (_state.value as DetailsState.Loaded).readmeState is DetailsState.ReadmeState.Loading) {
+			viewModelScope.launch {
+				val content = _state.value as DetailsState.Loaded
+				try {
+					val readme = getRepositoryReadmeUseCase(ownerName = content.githubRepo.owner, repositoryName = content.githubRepo.name)
+					_state.value = DetailsState.Loaded(
 						githubRepo = content.githubRepo,
-						readmeState = DetailsState.ReadmeState.Error(e.message, true),
+						readmeState = DetailsState.ReadmeState.Loaded(
+							markdown = Base64Decoder.decode(readme.content)
+						),
 					)
+				} catch (e: Exception) {
+					when (e) {
+						is NoNetworkConnectionException -> _state.value = DetailsState.Loaded(
+							githubRepo = content.githubRepo,
+							readmeState = DetailsState.ReadmeState.Error(e.message, true),
+						)
 
-					is HttpException                -> {
-						if (e.code() == 404) {
-							_state.value = DetailsState.Loaded(
-								githubRepo = content.githubRepo,
-								readmeState = DetailsState.ReadmeState.Empty,
-							)
+						is HttpException                -> {
+							if (e.code() == 404) {
+								_state.value = DetailsState.Loaded(
+									githubRepo = content.githubRepo,
+									readmeState = DetailsState.ReadmeState.Empty,
+								)
+							}
 						}
-					}
 
-					else                            -> _state.value = DetailsState.Loaded(
-						githubRepo = content.githubRepo,
-						readmeState = DetailsState.ReadmeState.Error(e.message.toString(), false),
-					)
+						else                            -> _state.value = DetailsState.Loaded(
+							githubRepo = content.githubRepo,
+							readmeState = DetailsState.ReadmeState.Error(e.message.toString(), false),
+						)
+					}
 				}
 			}
 		}
